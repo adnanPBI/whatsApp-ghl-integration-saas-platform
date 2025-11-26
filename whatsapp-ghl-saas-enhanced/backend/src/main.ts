@@ -45,8 +45,11 @@ async function bootstrap() {
 
   // Rate limiting (except webhooks)
   const limiter = rateLimit({
-    windowMs: (configService.get<number>('RATE_LIMIT_TTL') || 60) * 1000,
-    max: configService.get<number>('RATE_LIMIT_MAX') || 100,
+    windowMs:
+      (parseInt(configService.get<string>('RATE_LIMIT_TTL') || '60', 10) ||
+        60) * 1000,
+    max: parseInt(configService.get<string>('RATE_LIMIT_MAX') || '100', 10) ||
+      100,
     message: 'Too many requests from this IP',
     skip: (req) => req.path.startsWith('/api/webhooks'),
   });
@@ -73,7 +76,7 @@ async function bootstrap() {
   // API prefix
   app.setGlobalPrefix('api');
 
-  const port = configService.get('PORT') || 3000;
+  const port = parseInt(configService.get<string>('PORT') || '3000', 10);
   await app.listen(port);
 
   console.log(`🚀 Application is running on: http://localhost:${port}/api`);
