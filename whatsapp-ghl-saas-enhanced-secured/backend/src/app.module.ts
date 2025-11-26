@@ -37,7 +37,8 @@ import { LoggerModule } from './common/logger/logger.module';
       useFactory: (configService: ConfigService) => ({
         redis: {
           host: configService.get('REDIS_HOST'),
-          port: parseInt(configService.get<string>('REDIS_PORT') || '6379', 10),
+          port:
+            parseInt(configService.get<string>('REDIS_PORT') ?? '', 10) || 6379,
           password: configService.get('REDIS_PASSWORD'),
         },
       }),
