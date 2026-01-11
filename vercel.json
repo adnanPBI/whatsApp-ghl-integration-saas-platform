@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/api/health", "dest": "/api/health.ts" },
+    { "src": "/(.*)", "dest": "/api/index.ts" }
+  ]
+}
