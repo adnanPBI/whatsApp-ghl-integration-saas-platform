@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "scripts": {
+    "migration:generate": "npm --prefix backend run migration:generate",
+    "migration:run": "npm --prefix backend run migration:run",
+    "migration:show": "npm --prefix backend run migration:show"
+  }
+}
